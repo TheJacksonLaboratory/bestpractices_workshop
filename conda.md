@@ -1,4 +1,4 @@
-Installing miniconda
+# Installing miniconda
 
 1.  If you are on Windows, I highly recommend using WSL2 for everything
     we are going to be doing here (except github stuff). These
@@ -20,7 +20,7 @@ Installing miniconda
 5.  Open a new terminal window. If you see `(base)` at the beginning of
     your prompt, you have installed it successfully.
 
-Environments: how do they work?
+# Environments: how do they work?
 
 1.  The `(base)` at the beginning of the line indicates which conda
     environment is currently active. You can think of each environment
