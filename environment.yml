@@ -1,0 +1,8 @@
+name: workshop
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+  - pytest
+  - flake8
+  - coverage
