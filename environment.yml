@@ -1,4 +1,4 @@
-name: workshop
+name: bestpractices
 dependencies:
   - python=3.8
   - numpy
