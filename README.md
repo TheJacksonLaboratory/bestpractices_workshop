@@ -4,3 +4,4 @@
 List of participants:
 - Erick Ratamero, Research IT
 - Another Participant, Research IT
+- Participant1, Research IT
