@@ -26,7 +26,7 @@
 5.  In this exercise, the only change we are going to make is adding
     your name to the list of participants on **README.md**. First off,
     we are going to clone your fork of the workshop repository to your
-    computer. **If you already done cloned the workshop repository with
+    computer. **If you had already cloned the workshop repository with
     Github Desktop, remove it and make sure to clone your fork.**
 
 6.  Go to File -\> Clone repository... and then search for
