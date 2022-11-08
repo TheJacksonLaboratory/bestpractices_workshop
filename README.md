@@ -3,6 +3,7 @@
 
 List of participants:
 - Erick Ratamero, Research IT
+- Kurt Showmaker, Research IT
 
 
 
