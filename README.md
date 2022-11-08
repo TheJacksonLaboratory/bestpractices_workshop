@@ -4,6 +4,9 @@
 List of participants:
 - Erick Ratamero, Research IT
 - Michael Blanchard, Research IT
+- Kurt Showmaker, Research IT
+- Another Erick, Research IT (?)
+- Ahmed Sadeque, Research IT
 
 
 Lessons
