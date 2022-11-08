@@ -3,7 +3,7 @@
 
 List of participants:
 - Erick Ratamero, Research IT
-
+- Ahmed Sadeque, Research IT
 
 
 Lessons
