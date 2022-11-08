@@ -3,7 +3,7 @@
 
 List of participants:
 - Erick Ratamero, Research IT
-
+- Michael Blanchard, Research IT
 
 
 Lessons
