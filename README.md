@@ -4,7 +4,7 @@
 List of participants:
 - Erick Ratamero, Research IT
 
-
+Hello! - NEK
 
 Lessons
 
