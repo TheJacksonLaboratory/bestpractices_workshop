@@ -3,6 +3,7 @@
 
 List of participants:
 - Erick Ratamero, Research IT
+Hello! - NEK
 - Michael Blanchard, Research IT
 - Kurt Showmaker, Research IT
 - Another Erick, Research IT (?)
