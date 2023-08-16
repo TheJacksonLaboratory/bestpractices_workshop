@@ -1,26 +1,24 @@
 # Working with virtual environments and conda
 
-## Installing miniconda
+## Installing conda
 
-1.  If you are on Windows, I highly recommend using WSL2 for everything
-    we are going to be doing here (except github stuff). These
-    instructions will assume you are using WSL2.
+1. Before anything, open your terminal application (terminal on Mac, Command
+Prompt/WSL prompt on Windows).If you are on Windows, I highly recommend using WSL for everything
+    we are going to be doing here. These instructions will assume you are using WSL, but they apply to any terminal. Type `conda --version`. If you get a version output, you do not need to install anything. If you get an error, proceed to step 2.
 
-2.  Go to the miniconda downloads page
-    (<https://docs.conda.io/en/latest/miniconda.html>) and copy the link
-    to the version for your OS (note that if you are using WSL, you
-    should copy the one for LINUX).
+2.  Conda comes in many flavors and versions; in this workshop we will use miniforge, which is the one I recommend to most people. Go to the miniforge downloads page
+    (<https://github.com/conda-forge/miniforge#miniforge3>). If you are using Windows command prompt or Mac, install the executable for your system and proceed to step 5. If you are using WSL (or any Linux), copy the link to the version for LINUX and proceed to step 3.
 
 3.  On your terminal, do `wget <address here>`. This will download
-    miniconda to the current directory.
+    miniforge to the current directory.
 
 4.  Run the `.sh` file you have just downloaded. This might require
     you to change its permissions (with `chmod +x <filename>`). This
-    will install miniconda. Default directory is fine, if it asks if you
+    will install miniforge. Default directory is fine, if it asks if you
     want to run `conda init` say "yes".
 
 5.  Open a new terminal window. If you see `(base)` at the beginning of
-    your prompt, you have installed it successfully.
+    your prompt, you have installed it successfully. You can also run `conda --version` and see if you get a version output.
 
 ## Environments: how do they work?
 
@@ -48,12 +46,12 @@
     `conda env list` and you will see you have no environments.
 
 6.  Now let's try to create an environment *with* Python. Go ahead and
-    do `conda create -n bestpractices python=3.7`. Activate your new
+    do `conda create -n bestpractices python=3.10`. Activate your new
     environment and try `python --version`.
 
 7.  Now try running `python` and then `import numpy as np`. This
     will fail, since we do not have numpy installed in this environment.
-    Exit python.
+    Exit python (run `exit()` command).
 
 8.  One of the packages installed in this environment, together with
     python, is *pip*. Let's go ahead and do `pip install numpy`. Try
@@ -68,6 +66,6 @@
     contents of *environment.yml*. 
 
 11. Now, try running `conda env create -f environment.yml`. Try
-    activating the bestpractices environment and running 
+    activating the `bestpractices_final` (why is this the name?) environment and running 
     `python --version`. Try running `pip freeze` to see all the installed 
     packages. Everything listed at environment.yml should be there. 
