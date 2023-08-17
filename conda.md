@@ -3,13 +3,13 @@
 ## Installing conda
 
 1. Before anything, open your terminal application (terminal on Mac, Command
-Prompt/WSL prompt on Windows).If you are on Windows, I highly recommend using WSL for everything
+Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using WSL (Windows Subsystem for Linux) for everything
     we are going to be doing here. These instructions will assume you are using WSL, but they apply to any terminal. Type `conda --version`. If you get a version output, you do not need to install anything. If you get an error, proceed to step 2.
 
 2.  Conda comes in many flavors and versions; in this workshop we will use miniforge, which is the one I recommend to most people. Go to the miniforge downloads page
-    (<https://github.com/conda-forge/miniforge#miniforge3>). If you are using Windows command prompt or Mac, install the executable for your system and proceed to step 5. If you are using WSL (or any Linux), copy the link to the version for LINUX and proceed to step 3.
+    (<https://github.com/conda-forge/miniforge#miniforge3>). If you are using Windows command prompt, install the executable for your system and proceed to step 5. If you are using a Mac or WSL (or any Linux), copy the link to the version for your operating system (WSL users should copy the LINUX version) and proceed to step 3.
 
-3.  On your terminal, do `wget <address here>`. This will download
+3.  On your terminal, run `wget <address here>` with the link you just copied. This will download
     miniforge to the current directory.
 
 4.  Run the `.sh` file you have just downloaded. This might require
@@ -17,7 +17,7 @@ Prompt/WSL prompt on Windows).If you are on Windows, I highly recommend using WS
     will install miniforge. Default directory is fine, if it asks if you
     want to run `conda init` say "yes".
 
-5.  Open a new terminal window. If you see `(base)` at the beginning of
+5.  Open a NEW terminal window. If you see `(base)` at the beginning of
     your prompt, you have installed it successfully. You can also run `conda --version` and see if you get a version output.
 
 ## Environments: how do they work?
