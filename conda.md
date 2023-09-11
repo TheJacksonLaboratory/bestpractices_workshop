@@ -20,6 +20,8 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
 5.  Open a NEW terminal window. If you see `(base)` at the beginning of
     your prompt, you have installed it successfully. You can also run `conda --version` and see if you get a version output.
 
+6.  Run the following command to use [the much faster `libmamba` solver](https://www.anaconda.com/blog/conda-is-fast-now): `conda config --set solver libmamba`
+
 ## Environments: how do they work?
 
 1.  The `(base)` at the beginning of the line indicates which conda
