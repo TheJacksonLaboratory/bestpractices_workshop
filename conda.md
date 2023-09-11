@@ -9,8 +9,9 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
 2.  Conda comes in many flavors and versions; in this workshop we will use miniforge, which is the one I recommend to most people. Go to the miniforge downloads page
     (<https://github.com/conda-forge/miniforge#miniforge3>). If you are using Windows command prompt, install the executable for your system and proceed to step 5. If you are using a Mac or WSL (or any Linux), copy the link to the version for your operating system (WSL users should copy the LINUX version) and proceed to step 3.
 
-3.  On your terminal, run `wget <address here>` with the link you just copied. This will download
-    miniforge to the current directory.
+3.  On Linux, in your terminal, run `wget <address here>` with the link you just copied. 
+    On macOS, in the Terminal run, `curl -L -O <address here>` with the link you just copied.
+    (Note that the link should end in `.sh`.) This will download miniforge to the current directory.
 
 4.  Run the `.sh` file you have just downloaded. This might require
     you to change its permissions (with `chmod +x <filename>`). This
