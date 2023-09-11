@@ -35,37 +35,41 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
 
 3.  So first of all, let's try to create a new, "clean" environment.
     Type `conda create -n bestpractices`. This will create a new
-    environment named "bestpractices". Go ahead and do `conda activate
-    bestpractices` - this should change the beginning of your prompt
-    to `(bestpractices)`. We're now inside this new environment.
+    environment named "bestpractices" (`-n` is shorthand for `--name`).
+    Go ahead and do `conda activate bestpractices` - this should change
+    the beginning of your prompt to `(bestpractices)`. We're now inside
+    this new environment.
 
-4.  Try running `python`. It won't work. Why?
+5.  Try running `python`. It probably didn't work. Why?
 
-5.  Let's deactivate this empty environment and delete it. Do `conda
-    deactivate` and `conda remove --all -n bestpractices`. Try running
+6.  Let's deactivate this empty environment and delete it. Do `conda
+    deactivate` and `conda remove -n bestpractices --all`. Try running
     `conda env list` and you will see you have no environments.
 
-6.  Now let's try to create an environment *with* Python. Go ahead and
+7.  Now let's try to create an environment *with* Python. Go ahead and
     do `conda create -n bestpractices python=3.10`. Activate your new
-    environment and try `python --version`.
+    environment and try `python --version`. Also try `which python`.
+    This should show you a path within the newly created environment,
+    under your user, rather than in a system location like
+    `/bin` or `/usr/bin`.
 
-7.  Now try running `python` and then `import numpy as np`. This
+8.  Now try running `python` and then `import numpy as np`. This
     will fail, since we do not have numpy installed in this environment.
     Exit python (run `exit()` command).
 
-8.  One of the packages installed in this environment, together with
+9.  One of the packages installed in this environment, together with
     python, is *pip*. Let's go ahead and do `pip install numpy`. Try
-    running step 7 again. It should work now.
+    running step 8 again. It should work now.
 
-9.  Now let's deactivate and delete this environment again. Do 
-    `conda deactivate` and `conda remove --all -n bestpractices`.
+10.  Now let's deactivate and delete this environment again. Do 
+    `conda deactivate` and `conda remove -n bestpractices --all`.
 
-10. This time, we will try to create a conda environment for the
+11. This time, we will try to create a conda environment for the
     *environment.yml* in this repository. Navigate to where you cloned
     the workshop repository in your terminal and have a look at the
     contents of *environment.yml*. 
 
-11. Now, try running `conda env create -f environment.yml`. Try
+12. Now, try running `conda env create -f environment.yml`. Try
     activating the `bestpractices_final` (why is this the name?) environment and running 
     `python --version`. Try running `pip freeze` to see all the installed 
     packages. Everything listed at environment.yml should be there. 
