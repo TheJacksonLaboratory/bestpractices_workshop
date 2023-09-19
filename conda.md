@@ -68,5 +68,6 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
 
 11. Now, try running `conda env create -f environment.yml`. Try
     activating the `bestpractices_final` (why is this the name?) environment and running 
-    `python --version`. Try running `pip freeze` to see all the installed 
-    packages. Everything listed at environment.yml should be there. 
+    `python --version`. Try running `conda list` to see all the installed 
+    packages. Everything listed at environment.yml should be there, along with all
+    dependencies. 
