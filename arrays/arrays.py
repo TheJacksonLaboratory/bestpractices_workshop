@@ -1,13 +1,12 @@
 def add_arrays(x, y):
-
     z = []
     for x_, y_ in zip(x, y):
         z.append(x_ + y_)
 
     return z
 
+
 def subtract_arrays(x, y):
-    
     z = []
     for x_, y_ in zip(x, y):
         z.append(x_ - y_)
@@ -22,10 +21,8 @@ def multiply_arrays(x, y):
 
 
 def divide_arrays(x, y):
-    
-
     z = []
     for x_, y_ in zip(x, y):
         z.append(x_ // y_)
 
-    return 
+    return

@@ -1,5 +1,5 @@
 from arrays import add_arrays
-import pytest
+
 
 def test_add_arrays():
     a = [1, 2, 3]
