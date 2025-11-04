@@ -1,4 +1,4 @@
-from arrays import add_arrays, subtract_arrays, multiply_arrays, divide_arrays
+from arrays_completed import add_arrays, subtract_arrays, multiply_arrays, divide_arrays
 import pytest
 
 
