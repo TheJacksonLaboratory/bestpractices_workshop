@@ -6,8 +6,15 @@
 Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using WSL (Windows Subsystem for Linux) for everything
     we are going to be doing here. These instructions will assume you are using WSL, but they apply to any terminal. Type `conda --version`. If you get a version output, you do not need to install anything. If you get an error, proceed to step 2.
 
-2.  Conda comes in many flavors and versions; in this workshop we will use miniforge, which is the one I recommend to most people. Go to the miniforge downloads page
-    (<https://github.com/conda-forge/miniforge#miniforge3>). If you are using Windows command prompt, install the executable for your system and proceed to step 5. If you are using a Mac or WSL (or any Linux), copy the link to the version for your operating system (WSL users should copy the LINUX version) and proceed to step 3.
+2.  Conda is [an open-source package and environement management 
+    system](https://conda.io/projects/conda/en/latest/index.html) for Python, R, and more. 
+    There are several distributions or flavors and it can pull packages from many different sources
+    called "channels". In this workshop we will use miniforge, which is the one I recommend to most people. 
+    It is set up to use the community maintained ["conda-forge" channels](https://conda-forge.org/docs/user/introduction.html) which tend to have the most up-to-date packages for most platforms.  
+    Go to the miniforge downloads page
+    (<https://github.com/conda-forge/miniforge#miniforge3>).  
+    If you are using Windows command prompt, install the executable for your system and proceed to step 5.  
+    If you are using a Mac or WSL (or any Linux), copy the link to the version for your operating system (WSL users should copy the LINUX version) and proceed to step 3.
 
 3.  On Linux, in your terminal, run `wget <address here>` with the link you just copied. 
     On macOS, in the Terminal run, `curl -L -O <address here>` with the link you just copied.
@@ -32,7 +39,8 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
 2.  **VERY IMPORTANTLY, DO NOT INSTALL THINGS ON THE BASE ENVIRONMENT.**
     It's a sure way to make things more confusing for yourself. Anything
     you do should have its own environment. You should never be doing
-    any work on your base environment.
+    any work on your base environmen: it's the environment conda uses
+    to run itself.
 
 3.  So first of all, let's try to create a new, "clean" environment.
     Type `conda create -n bestpractices`. This will create a new
@@ -40,6 +48,8 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
     Go ahead and do `conda activate bestpractices` - this should change
     the beginning of your prompt to `(bestpractices)`. We're now inside
     this new environment.
+    *Always remember to activate the environment you want to use or 
+    make changes to!* 
 
 4.  Try running `python`. It probably didn't work. Why?
 
