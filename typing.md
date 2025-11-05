@@ -44,12 +44,12 @@
 
     You can also import additional types from the [`typing` module](https://docs.python.org/3/library/typing.html#) or other modules you use
 
-6. Type hints are not enforced at runtime, but you can use tools like [`mypy`](http://mypy-lang.org/) to check your code for type errors. To check your code, run:
+5. Type hints are not enforced at runtime, but you can use tools like [`mypy`](http://mypy-lang.org/) to check your code for type errors. To check your code, run:
     ```
     mypy your_script.py
     ```
     Mypy will report any type mismatches it finds, helping you catch bugs before they happen.
 
-7. If you want to learn more, check out:
+6. If you want to learn more, check out:
     - [Python typing documentation](https://docs.python.org/3/library/typing.html)
     - [mypy Type hints cheat sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
