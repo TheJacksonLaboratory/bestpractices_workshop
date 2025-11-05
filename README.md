@@ -5,7 +5,7 @@ Lessons
 
 1. [Working with virtual environments and conda](conda.md)
 2. [Running python tests with pytest](pytest.md)
-3. [Writing well-documented and clean code: docstrings and flake8](docstrings.md)
+3. [Writing well-documented and clean code: docstrings and linting](docstrings.md)
 
 Extra lessons
-1. [Github workflow: branch-update-PR](git.md)
+1. [Github Desktop workflow: branch-update-PR](git.md)
