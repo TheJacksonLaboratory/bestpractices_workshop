@@ -1,46 +1,41 @@
 # Working with virtual environments and conda
 
-## Installing conda
+1. To work with Python projects, it's a good idea to use virtual environments. **Virtual environments allow you to create isolated spaces for your Python projects, each with its own set of packages and dependencies.** This way, you can avoid conflicts between different projects that may require different versions of the same package. This is particularly important in scientific computing, where you may have a long-running project that you need to keep working with, while also wanting to be able to start something new with its own dependencies.
 
-1. Before anything, open your terminal application (terminal on Mac, Command
-Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using WSL (Windows Subsystem for Linux) for everything
-    we are going to be doing here. These instructions will assume you are using WSL, but they apply to any terminal. Type `conda --version`. If you get a version output, you do not need to install anything. If you get an error, proceed to step 2.
+2. At the heart of a Python environment are:
+    - A Python interpreter: a specific version of Python that will be used to execute your code
+    - An environment management tool: a tool to create, manage, and switch between different environments
+    - A package management tool: a tool to install, update, and remove packages within an environment
 
-2.  Conda is [an open-source package and environement management 
-    system](https://conda.io/projects/conda/en/latest/index.html) for Python, R, and more. 
-    There are several distributions or flavors and it can pull packages from many different sources
-    called "channels". In this workshop we will use miniforge, which is the one I recommend to most people. 
-    It is set up to use the community maintained ["conda-forge" channels](https://conda-forge.org/docs/user/introduction.html) which tend to have the most up-to-date packages for most platforms.  
-    Go to the miniforge downloads page
-    (<https://github.com/conda-forge/miniforge#miniforge3>).  
-    If you are using Windows command prompt, install the executable for your system and proceed to step 5.  
-    If you are using a Mac or WSL (or any Linux), copy the link to the version for your operating system (WSL users should copy the LINUX version) and proceed to step 3.
+3. [`Conda`](https://conda.org) is a tool that combines all three of these functionalities. It allows you to create and manage virtual environments, manage different versions of Python, and install packages. Conda is particularly popular in the scientific Python community due to its ability to handle complex system-level dependencies, such as GPU support, and its support for packages outside of the Python ecosystem (such as R, C libraries, etc).
 
-3.  On Linux, in your terminal, run `wget <address here>` with the link you just copied. 
-    On macOS, in the Terminal run, `curl -L -O <address here>` with the link you just copied.
-    (Note that the link should end in `.sh`.) This will download miniforge to the current directory.
+4. There are other tools that can be used to manage virtual environments, such as [`venv`](https://docs.python.org/3/library/venv.html) (built into Python) and newer ones like [`uv`](https://docs.astral.sh/uv/) and [`pixi`](https://pixi.sh/latest/). These use a **project** oriented approach, where the environment is tied to a specific project directory. Conda, on the other hand creates and manages environments centrally, independently of any specific directory. At the end of the day, it's a matter of preference and use case, but the key take home message is to actually **always use virtual environments for your projects!**
 
-4.  Run the `.sh` file you have just downloaded. This might require
-    you to change its permissions (with `chmod +x <filename>`). This
-    will install miniforge. Default directory is fine, if it asks if you
-    want to run `conda init` say "yes".
+## Installing conda, *if you don't have it already*
 
-5.  Open a NEW terminal window. If you see `(base)` at the beginning of
+1.  There are several distributions of `conda` and it can pull packages from many different sources
+    called "channels". In this workshop we will use the [conda-forge](https://conda-forge.org) distribution called "miniforge" (or "miniforge3"). 
+    Go to the conda-forge downloads page:
+    [https://conda-forge.org/download/](https://conda-forge.org/download/).  
+    Download the installer for your operating system (Mac, Windows, Linux) and architecture (x86_64/amd64 or arm64/aarch64) and follow the installation instructions on that page.
+    Note: When prompted whether to "automatically initialize conda", I recommend saying "yes". And on Windows, I recommend checking the options to “Create start menu shortcuts” and “Add Miniforge3 to my PATH environment variable”.
+
+2.  Open a NEW terminal window. If you see `(base)` at the beginning of
     your prompt, you have installed it successfully. You can also run `conda --version` and see if you get a version output.
 
 ## Environments: how do they work?
 
 1.  The `(base)` at the beginning of the line indicates which conda
-    environment is currently active. You can think of each environment
-    as its own "mini-computer" for python purposes: it will have its own
-    version of python, with its own packages. Conda takes care of all
-    dependencies and so on.
+    environment is currently active: the `base` environment. 
+    Each environment will have its own version of Python, with its own 
+    packages. Conda takes care of all dependencies and so on. 
 
 2.  **VERY IMPORTANTLY, DO NOT INSTALL THINGS ON THE BASE ENVIRONMENT.**
     It's a sure way to make things more confusing for yourself. Anything
-    you do should have its own environment. You should never be doing
-    any work on your base environmen: it's the environment conda uses
-    to run itself.
+    you do should have its *own environment*. You should never be doing
+    any work on your base environment: it's the environment `conda` uses
+    to run itself, so a conflict or problem there can break your entire `conda`
+    installation.
 
 3.  So first of all, let's try to create a new, "clean" environment.
     Type `conda create -n bestpractices`. This will create a new
@@ -58,30 +53,55 @@ Prompt/WSL prompt on Windows). If you are on Windows, I highly recommend using W
     `conda env list` and you will see you have no environments.
 
 6.  Now let's try to create an environment *with* Python. Go ahead and
-    do `conda create -n bestpractices python=3.10`. Activate your new
-    environment and try `python --version`. Also try `which python`.
+    do `conda create -n bestpractices python=3.13` (or pick a version
+    of your choice). Activate your new environment and try `python --version`. 
+    Also try `which python`.
     This should show you a path within the newly created environment,
     under your user, rather than in a system location like
     `/bin` or `/usr/bin`.
 
 7.  Now try running `python` and then `import numpy as np`. This
-    will fail, since we do not have numpy installed in this environment.
-    Exit python (run `exit()` command).
+    should fail, but why?
 
-8.  One of the packages installed in this environment, together with
-    python, is *pip*. Let's go ahead and do `pip install numpy`. Try
-    running step 7 again. It should work now.
+## Installing packages in your environment
 
-9.  Now let's deactivate and delete this environment again. Do 
+1. With a `conda` environment active, you have two options for installing Python packages:
+    - Using `conda` itself: `conda install numpy`  
+
+        This will install the package from the active conda channel, in this case `conda-forge`.
+        It can be used to install packages that go beyond just Python! For a listing, see:
+        [https://conda-forge.org/packages/](https://conda-forge.org/packages/)
+
+    - Using the Python package installer `pip`: `pip install numpy`  
+
+        This will install Python packages from [PyPI (the Python Package Index)](https://pypi.org). 
+        
+    Generally, you can use either method, but *mixing* them can sometimes lead to conflicts.
+    If you do use both, try to install what you need using `conda` first and then use `pip` for
+    packages that are not available via `conda`.
+
+2.  Try running step 7 from above again. It should work now.
+
+3.  Now let's deactivate and delete this environment again. Do 
     `conda deactivate` and `conda remove -n bestpractices --all`.
 
-10. This time, we will try to create a conda environment for the
+4.  This time, we will try to create an environment using the
     *environment.yml* in this repository. Navigate to where you cloned
     the workshop repository in your terminal and have a look at the
     contents of *environment.yml*. 
 
-11. Now, try running `conda env create -f environment.yml`. Try
+5. Now, try running `conda env create -f environment.yml`. Try
     activating the `bestpractices_final` (why is this the name?) environment and running 
     `python --version`. Try running `conda list` to see all the installed 
     packages. Everything listed at environment.yml should be there, along with all
     dependencies. 
+
+## Some advice on projects and dependencies
+
+Beyond using virtual environments, here are some best practices when it comes to managing dependencies for your projects:
+- Keep track of every package for every module you import from in your code! Maintain either an `environment.yml` (for `conda`) or a `requirements.txt` file (for `pip`) that lists all of the dependencies needed to run your code.
+- For *reproducibility*, it's a good idea to specify (pin) the *specific versions* of your dependencies you are using in your environment files.
+- For *portability* and ability to incorporate your code into other projects, avoid pinning versions  strictly: pin to the minimum version required for the functionality you need.
+- In addition to your environment file, for maximal reproducibility, consider generating **a lock file**, which specifies the *exact versions of all packages and their dependencies* in your environment. This can be done with `conda` using [conda-lock](https://github.com/conda/conda-lock) or with `pip` using [pip-tools](https://github.com/jazzband/pip-tools/). (Additionally, both `uv` and `pixi` automatically generate lock files.)
+- If you will be sharing your code or expect others to run it, consider making a Python package. Check out the [pyOpenSci Python Package Guide](https://www.pyopensci.org/python-package-guide/index.html) for more details on how to do that!
+    
