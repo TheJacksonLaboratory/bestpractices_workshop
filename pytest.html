@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -385,33 +420,47 @@ ul.task-list li input[type="checkbox"] {
 <section id="testing-python-code-with-pytest" class="level1">
 <h1>Testing Python code with <code>pytest</code></h1>
 <ol type="1">
-<li><p>In this section, we are going to be using <em>pytest</em> to run automated tests on some code. The code we are going to be using is on the <strong>arrays</strong> folder. The functions that will be tested are in <strong>arrays.py</strong>, and the test code will go in <strong>test_arrays.py</strong>. Testing your code is extremely important, and it should be done WHILE you are writing it, rather than AFTER.</p></li>
+<li><p>In this section, we are going to be using <em>pytest</em> to run automated tests on some code. The code we are going to be using is in the <strong>arrays</strong> folder within this repository. The functions that will be tested are in <strong>arrays.py</strong>, and the test code will go in <strong>test_arrays.py</strong>. Testing your code is extremely important, and it should be done WHILE you are writing it, rather than AFTER.</p></li>
 <li><p>Usual methods for testing code are doing some manual checks, such as running it over particular input files or variables and checking the results. This has limitations: it might fail to check some parts of the code, or it might fail to find errors that are not immediately obvious. In either case, it is also difficult to find exactly where your errors might be.</p></li>
 <li><p>To avoid those pitfalls, we should write a set of tests that use known inputs and check for matching with a set of expected outputs. We will write each test to run over as little of the code as possible, such that we can easily identify which parts of the code are failing. This type of test is called a “unit test”, in contrast to “integration tests” that test multiple parts of the code at once. Tip: break long, complex functions with multiple control structures (e.g.&nbsp;if/else, for, while) into smaller functions that do one thing each to make your code easier to read, test, and maintain.</p></li>
-<li><p>Let’s start by looking into <strong>arrays.py</strong> and checking the <strong>add_arrays()</strong> function. It’s a pretty simple function; it takes two arrays and add them up element-wise. Now, let’s look at <strong>test_add_arrays()</strong> in <strong>test_arrays.py</strong>. How is testing being done here? Can you break it? What happens when you run <code>python arrays/test_arrays.py</code>?</p></li>
-<li><p>The output of this test is not particularly useful. Imagine if you had five different functions with five different tests; would an output like <code>OK BROKEN OK BROKEN BROKEN</code> help much? Instead of that structure, we are going to use <code>assert</code> statements; <code>assert</code> is always followed by something boolean (i.e.&nbsp;something that will be either true or false). Empty lists, the number 0 and <code>None</code> are all false-y. If the boolean is true, nothing happens when <code>assert</code> is run; if it is false, an exception is raised. You can try running <code>assert 5 == 5</code> and <code>assert 5 == 6</code> in a python shell to see what happens.</p></li>
-<li><p>Now we are going to replace the if/else block in <strong>test_add_arrays()</strong> with an assert that looks like <code>assert output == expect</code>. What happens when you run <code>python arrays/test_arrays.py</code>? What if the test fails?</p></li>
-<li><p>You see that now at least we get a specific line when the test fails; that’s a good start! However, if we had multiple tests, code execution would be stopped at the exception thrown by <code>assert</code>. Also, we still need to explicitly call <code>test_add_arrays()</code> in that test file, which would be easy to forget, especially if we had a bunch of tests. That’s where we are going to be using <code>pytest</code>!</p></li>
-<li><p>Our first step is removing the call to <code>test_add_arrays()</code> from the end of <strong>test_arrays.py</strong>; pytest will take care of that for us. Now, in your terminal, just run <code>pytest</code>. What happened? What if the test fails?</p></li>
+<li><p>Let’s start by looking into <strong>arrays.py</strong> and checking the <code>add_arrays()</code> function. It’s a pretty simple function; it takes two arrays and add them up element-wise. Now, let’s look at <code>test_add_arrays()</code> in <strong>test_arrays.py</strong>. How is testing being done here? Can you break it? What happens when you run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> arrays/test_arrays.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(Is your virtual environment active? If not, activate it first!)</p></li>
+<li><p>The output of this test is not particularly useful. Imagine if you had five different functions with five different tests; would an output like <code>OK BROKEN OK BROKEN BROKEN</code> help much?<br>
+Instead of that structure, we are going to use <code>assert</code> statements; <code>assert</code> is always followed by something <em>boolean</em> (i.e.&nbsp;something that will be either true or false). Empty lists, the number 0 and <code>None</code> are all false-y. If the boolean is true, nothing happens when <code>assert</code> is run; if it is false, an exception is raised. You can try running <code>assert 5 == 5</code> and <code>assert 5 == 6</code> in a Python shell to see what happens.</p></li>
+<li><p>Now we are going to replace the <code>if/else</code> block in <code>test_add_arrays()</code> with an assert that looks like <code>assert output == expect</code>. What happens when you run <code>python arrays/test_arrays.py</code>? What if the test fails?</p></li>
+<li><p>You see that now at least we get a specific line when the test fails; that’s a good start! However, if we had multiple tests, code execution would be stopped at the exception thrown by <code>assert</code>. Also, we still need to explicitly call <code>test_add_arrays()</code> in that test file, which would be easy to forget, especially if we had a bunch of tests. That’s where we are going to be using <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a>!</p></li>
+<li><p>Our first step is removing the call to <code>test_add_arrays()</code> from the end of <code>test_arrays.py</code>; <code>pytest</code> will take care of that for us. Now, in your terminal, just run <code>pytest</code>. What happened? What if the test fails?</p></li>
 <li><p><code>pytest</code> will find all files named <code>test_*.py</code> and <code>*_test.py</code> and all functions starting with names starting with <code>test</code> inside these files, and it will run those, one at a time, reporting the results of each.</p></li>
-<li><p>It’s your turn; write a <code>test_subtract_arrays()</code> function that tests the <code>subtract_arrays()</code> function! What happens when you run <code>pytest</code> now?</p></li>
-<li><p>Let’s do the opposite now; write a <code>test_multiply_arrays()</code> function with the behavior you would expect to see from a <code>multiply_arrays()</code> function, and then write <code>multiply_arrays()</code> to make sure the tests pass! This is a process called <em>Test-driven development</em> (TDD) - you start by writing your code requirements as tests, and then write code that passes those tests. It is a popular approach in certain kinds of software development.</p></li>
-<li><p>Now imagine you want to test multiple cases in <code>test_add_arrays()</code> - positive results, negative results, zero results, for example. You could change the code in that test function to create the <code>a</code>, <code>b</code> and <code>expect</code> arrays multiple times, and do one assertion per case. However, pytest allows for a simpler possibility: parameterizing inputs to your test. You can do this using the decorator <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html"><code>@pytest.mark.parametrize()</code></a> before your test function. It takes two arguments: a <em>tuple or string</em> with the <em>names</em> of the parameters you want to pass to this function, and a <em>list</em> containing <em>tuples</em> of values of the parameters you want to pass. So for a single case, it would look like <code>@pytest.mark.parametrize(("a", "b", "expect"), [([1, 2, 3], [4, 5, 6], [5, 7, 9])])</code>, and you could add extra tuples for additional test cases. Then all you need to do is add <code>a</code>, <code>b</code> and <code>expect</code> as arguments to your test function.</p></li>
-<li><p>Try doing that for your test functions. What happens when you run <code>pytest</code> now? Can you find the errors in the <code>divide_arrays()</code> function with some clever testing? (hint: there are two errors)</p></li>
+<li><p><strong>Exercise:</strong> It’s your turn to write a test! Write a <code>test_subtract_arrays()</code> function in <code>test_arrays.py</code> that tests the <code>subtract_arrays()</code> function in <code>arrays.py</code>! What happens when you run <code>pytest</code> now?</p></li>
+<li><p><strong>Exercise:</strong> Let’s do the opposite: write a <code>test_multiply_arrays()</code> function with the behavior you would <em>expect</em> to see from a <code>multiply_arrays()</code> function. Then, write the <code>multiply_arrays()</code> to fulfill the test requirements.<br>
+This is a process called <em>Test-driven development</em> (TDD): you start by writing your code requirements as tests and then write code that passes those tests. It is a popular approach in certain kinds of software development.</p></li>
+<li><p>Now imagine you want to test multiple cases in <code>test_add_arrays()</code>: positive results, negative results, zero results, etc. You could change the code in that test function to create the <code>a</code>, <code>b</code> and <code>expect</code> arrays multiple times, and do one assertion per case.<br>
+However, <code>pytest</code> allows for a simpler possibility: parameterizing inputs to your test. You can do this using the decorator <a href="https://docs.pytest.org/en/stable/how-to/parametrize.html"><code>@pytest.mark.parametrize()</code></a> before your test function.<br>
+It takes two arguments: a <em>tuple or string</em> with the <em>names</em> of the parameters you want to pass to this function, and a <em>list</em> containing <em>tuples</em> of values of the parameters you want to pass. So for a single case, it would look like <code>@pytest.mark.parametrize(("a", "b", "expect"), [([1, 2, 3], [4, 5, 6], [5, 7, 9])])</code>, and you could add extra tuples for additional test cases. Then all you need to do is add <code>a</code>, <code>b</code> and <code>expect</code> as arguments to your test function.</p></li>
+<li><p><strong>Exercise:</strong> Try using <code>@pytest.mark.parametrize()</code> for your test functions. What happens when you run <code>pytest</code> now? Write a test for <code>divide_arrays()</code> using this approach. Can you find the bugs in the <code>divide_arrays()</code> function with some clever testing?</p></li>
 <li><p>So far, we have assumed that everything passed to our array functions is correct; that is rarely an assumption you can make in real life. What happens if you run <code>add_arrays("this is a string", 1)</code>? What about <code>add_arrays([1, 2], [1, 2, 3])</code>?</p></li>
 <li><p>It’s time to add explicit exception handling to our functions. You will probably want to do <code>raise ValueError("array size mismatch")</code> for the case where arrays sizes are different, and <code>raise TypeError("arguments should be lists")</code> for when the arguments are not lists.</p></li>
 <li><p>Now, we can add new test functions named <code>test_add_arrays_error()</code> and so on, where we check if errors are being raised correctly. That is done by wrapping our function call with <code>with pytest.raises(ValueError)</code>, for example. What happens when you run <code>pytest</code> now? Add checks for both possible errors we came up with. What other cases can happen in e.g.&nbsp;<code>divide_arrays()</code>?</p></li>
-<li><p>We have successfully found a way to separate the data to be tested from the code to be tested. <code>pytest</code> has an even better way to do that for more complex cases, for example, when you want multiple test functions using the same data. They are called <a href="https://docs.pytest.org/en/stable/explanation/fixtures.html#about-fixtures"><em>fixtures</em></a>. A <em>fixture</em> is defined as a function that returns something we want to use repeatedly in our tests. <code>pytest</code> provides <a href="https://docs.pytest.org/en/stable/reference/fixtures.html">some fixtures out of the box</a>, like the very useful <code>tmp_path</code> fixture that gives you a unique temporary location. But you can also create your own: fixtures can be used to set up test data, create mock objects, or perform any other setup tasks that are needed for your tests. To define a fixture, you use the decorator <code>@pytest.fixture</code> before a function. After defining a fixture, you can pass the name of the function as an argument in your test function, and that argument will assume the value that is returned by the fixture.</p></li>
+<li><p>We have successfully found a way to separate the data to be tested from the code to be tested. <code>pytest</code> has an even better way to do that for more complex cases, for example, when you want multiple test functions using the same data. They are called <a href="https://docs.pytest.org/en/stable/explanation/fixtures.html#about-fixtures"><em>fixtures</em></a>.<br>
+A <em>fixture</em> is defined as a function that returns something we want to use repeatedly in our tests. <code>pytest</code> provides <a href="https://docs.pytest.org/en/stable/reference/fixtures.html">some fixtures out of the box</a>, like the very useful <code>tmp_path</code> fixture that gives you a unique temporary location.<br>
+But you can also create your own: fixtures can be used to set up test data, create mock objects, or perform any other setup tasks that are needed for your tests. To define a fixture, you use the decorator <code>@pytest.fixture</code> before a function. After defining a fixture, you can pass the name of the function as an argument in your test function, and that argument will assume the value that is returned by the fixture.</p></li>
 <li><p>Try creating a <code>pair_of_lists()</code> fixture and passing it to a test function. What happens when you run <code>pytest</code>? is <code>pair_of_lists()</code> run?</p></li>
+<li><p>Some final tips: append <code>-v</code> for more verbose output or <code>-s</code> to see <code>print()</code> outputs. You can also run specific tests by passing the file name and function name to <code>pytest</code>, e.g.&nbsp;<code>pytest arrays/test_arrays.py::test_add_arrays</code>.</p></li>
 </ol>
 <section id="test-coverage" class="level2">
 <h2 class="anchored" data-anchor-id="test-coverage">Test coverage</h2>
 <ol type="1">
 <li><p>When writing tests, it’s important to know how much of your code is actually being tested by your test suite. This is called <strong>code coverage</strong>. Code coverage is a metric that tells you what percentage of your code is run (“covered”) when your tests are executed. High coverage means most of your code is tested, while low coverage means there are many untested parts, where bugs could hide.</p></li>
 <li><p>The most common tool for measuring code coverage in Python is <a href="https://coverage.readthedocs.io/"><code>coverage</code></a>. You can run it from the command line to see how much of your code is covered by your tests.</p></li>
-<li><p>To use <code>coverage</code> with ``pytest, run: <code>sh     coverage run -m pytest</code> This will run your tests and collect coverage data.</p></li>
-<li><p>To see a summary in your terminal, run: <code>sh     coverage report</code></p></li>
-<li><p>To generate a detailed HTML report you can view in your browser, run: <code>sh     coverage html</code> Then open the file <code>htmlcov/index.html</code> in your browser to explore which lines of code are covered and which are not.</p></li>
+<li><p>To use <code>coverage</code> with <code>pytest</code>, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> run <span class="at">-m</span> pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will run your tests and collect coverage data.</p></li>
+<li><p>To see a summary in your terminal, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> report</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>To generate a detailed HTML report you can view in your browser, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then open the file <code>htmlcov/index.html</code> in your browser to explore which lines of code are covered and which are not.</p></li>
 <li><p>Reviewing your coverage report can help you identify untested code and improve your test suite.</p></li>
 </ol>
 </section>
