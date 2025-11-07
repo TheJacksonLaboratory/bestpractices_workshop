@@ -1,4 +1,4 @@
-# Writing type-safe and readable code: Python type hints
+# Python type hints
 
 1. In this section, we will look at _type hints_. Type hints are a way to annotate your Python code with information about the expected types of variables, function arguments, and return values. *Python is dynamically typed, so this is not required.* However, type hints help both humans and tools understand your code, catch bugs early, and improve code readability and maintainability. Type hints are part of the Python standard library since Python 3.5. For more details, see [PEP484 which introduced type hints](https://peps.python.org/pep-0484/) and the [`typing` module documentation](https://docs.python.org/3/library/typing.html). Importantly, type hints **do not change the runtime behavior of your code**; they are simply annotations.
 
@@ -8,6 +8,7 @@
     - **Better IDE support:** Many editors use type hints for autocompletion and inline documentation.
 
 3. Type hints use the `:` syntax for variables and function arguments, and `->` for return types. For example:
+
     ```python
     # Variable annotation
     a: int = 5
