@@ -58,52 +58,53 @@ def test_divide_arrays(a, b, expect):
     assert output == expect
 
 
-def test_add_arrays_errors():
-    a = [1, 2]
-    b = [1, 2, 3]
-    with pytest.raises(ValueError):
-        _ = add_arrays(a, b)
-    a = 1
-    b = "a"
-    with pytest.raises(TypeError):
-        _ = add_arrays(a, b)
+@pytest.mark.parametrize(
+    ("a", "b", "error"),
+    [
+        ([1, 2], [1, 2, 3], ValueError),
+        (1, "a", TypeError),
+    ]
+)
+def test_add_arrays_errors(a, b, error):
+    with pytest.raises(error):
+        add_arrays(a, b)
 
 
-def test_subtract_arrays_errors():
-    a = [1, 2]
-    b = [1, 2, 3]
-    with pytest.raises(ValueError):
-        _ = subtract_arrays(a, b)
-    a = 1
-    b = "a"
-    with pytest.raises(TypeError):
-        _ = subtract_arrays(a, b)
+@pytest.mark.parametrize(
+    ("a", "b", "error"),
+    [
+        ([1, 2], [1, 2, 3], ValueError),
+        (1, "a", TypeError),
+    ]
+)
+def test_subtract_arrays_errors(a, b, error):
+    with pytest.raises(error):
+        subtract_arrays(a, b)
 
 
-def test_multiply_arrays_errors():
-    a = [1, 2]
-    b = [1, 2, 3]
-    with pytest.raises(ValueError):
-        _ = multiply_arrays(a, b)
-    a = 1
-    b = "a"
-    with pytest.raises(TypeError):
-        _ = multiply_arrays(a, b)
+@pytest.mark.parametrize(
+    ("a", "b", "error"),
+    [
+        ([1, 2], [1, 2, 3], ValueError),
+        (1, "a", TypeError),
+    ]
+)
+def test_multiply_arrays_errors(a, b, error):
+    with pytest.raises(error):
+        multiply_arrays(a, b)
 
 
-def test_divide_arrays_errors():
-    a = [1, 2]
-    b = [1, 2, 3]
-    with pytest.raises(ValueError):
-        _ = divide_arrays(a, b)
-    a = 1
-    b = "a"
-    with pytest.raises(TypeError):
-        _ = divide_arrays(a, b)
-    a = [1, 2, 3]
-    b = [0, 2, 3]
-    with pytest.raises(ZeroDivisionError):
-        _ = divide_arrays(a, b)
+@pytest.mark.parametrize(
+    ("a", "b", "error"),
+    [
+        ([1, 2], [1, 2, 3], ValueError),
+        (1, "a", TypeError),
+        ([1, 2, 3], [0, 2, 3], ZeroDivisionError),
+    ]
+)
+def test_divide_arrays_errors(a, b, error):
+    with pytest.raises(error):
+        divide_arrays(a, b)
 
 
 @pytest.fixture
