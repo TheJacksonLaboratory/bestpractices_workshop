@@ -1,6 +1,5 @@
 def add_arrays(x, y):
-    """
-    Add two lists element-wise.
+    """Add two lists element-wise.
 
     Parameters
     ----------
@@ -18,6 +17,7 @@ def add_arrays(x, y):
     --------
     >>> add_arrays([1, 4, 5], [4, 3, 5])
     [5, 7, 10]
+
     """
     if not isinstance(x, list) or not isinstance(y, list):
         raise TypeError("arguments should be arrays")
@@ -32,8 +32,7 @@ def add_arrays(x, y):
 
 
 def subtract_arrays(x, y):
-    """
-    Subtract two lists element-wise.
+    """Subtract two lists element-wise.
 
     Parameters
     ----------
@@ -51,6 +50,7 @@ def subtract_arrays(x, y):
     --------
     >>> subtract_arrays([4, 7, 5], [2, 3, 5])
     [2, 4, 0]
+
     """
     if not isinstance(x, list) or not isinstance(y, list):
         raise TypeError("arguments should be arrays")
@@ -64,8 +64,7 @@ def subtract_arrays(x, y):
 
 
 def multiply_arrays(x, y):
-    """
-    Multiply two lists element-wise.
+    """Multiply two lists element-wise.
 
     Parameters
     ----------
@@ -83,6 +82,7 @@ def multiply_arrays(x, y):
     --------
     >>> multiply_arrays([1, 4, 5], [4, 3, 5])
     [4, 12, 25]
+
     """
     if not isinstance(x, list) or not isinstance(y, list):
         raise TypeError("arguments should be arrays")
@@ -96,8 +96,7 @@ def multiply_arrays(x, y):
 
 
 def divide_arrays(x, y):
-    """
-    Divide two lists element-wise.
+    """Divide two lists element-wise.
 
     Parameters
     ----------
@@ -115,6 +114,7 @@ def divide_arrays(x, y):
     --------
     >>> divide_arrays([6, 4, 5], [4, 2, 5])
     [1.5, 2, 1]
+
     """
     if not isinstance(x, list) or not isinstance(y, list):
         raise TypeError("arguments should be arrays")

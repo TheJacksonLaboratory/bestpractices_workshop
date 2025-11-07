@@ -16,7 +16,6 @@ def subtract_arrays(x, y):
 
 def multiply_arrays(x, y):
     """TODO: Write this function."""
-
     pass
 
 
