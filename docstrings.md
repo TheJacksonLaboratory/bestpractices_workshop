@@ -21,7 +21,7 @@
 9. It's good practice to include an _Examples_ section as well - this is just to show how your code would be used, not for testing! If your function has optional arguments or can be used in multiple ways, make sure to include multiple examples.
 
 10. Now, put all the information you got together and write docstrings for the functions we have in `arrays.py`! As an example, I am adding an example docstring for `add_arrays()` below:
-```
+```python
     """
     This function adds together each element of the two passed lists.
 

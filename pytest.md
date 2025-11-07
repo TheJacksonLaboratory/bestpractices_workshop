@@ -1,4 +1,4 @@
-# Running python tests with pytest
+# Testing Python code with `pytest`
 
 1.  In this section, we are going to be using _pytest_ to run automated tests on some code. The code we are going to be using is on the **arrays** folder. The functions that will be tested are in **arrays.py**, and the test code will go in **test_arrays.py**. Testing your code is extremely important, and it should be done WHILE you are writing it, rather than AFTER. 
 

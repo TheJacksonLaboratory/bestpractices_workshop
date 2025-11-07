@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Best Practices in Python Workshop"
+  sidebar:
+    style: "floating"
+    contents:
+      - text: Virtual Environments
+        href: conda.md
+      - text: Testing
+        href: pytest.md
+      - text: Docstrings & Linting
+        href: docstrings.md
+      - text: Type Hints
+        href: typing.md
+  page-navigation: true
+
+
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+date: last-modified
+license: "CC BY"
