@@ -4,6 +4,17 @@ project:
 
 website:
   title: "Best Practices in Python Workshop"
+  open-graph: true
+  bread-crumbs: false
+  navbar:
+    pinned: false
+    tools-collapse: true
+    background: "primary"
+    right:
+      - icon: github
+        href: https://github.com/TheJacksonLaboratory/bestpractices_workshop
+        aria-label: GitHub repository
+
   sidebar:
     style: "floating"
     contents:
@@ -17,12 +28,25 @@ website:
         href: typing.md
   page-navigation: true
 
+  search:
+    location: sidebar
+    type: textbox
+    show-item-context: true
 
+  repo-url: "https://github.com/TheJacksonLaboratory/bestpractices_workshop"
+  repo-actions: [source, edit, issue]
 
 format:
   html:
-    theme: cosmo
     toc: true
+    toc-depth: 3
+    toc-expand: true
+    search: true
+    theme:
+      light: cosmo
+      dark: cyborg
+    respect-user-color-scheme: true
+
 
 date: last-modified
 license: "CC BY"
