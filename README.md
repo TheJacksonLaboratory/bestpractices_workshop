@@ -1,7 +1,3 @@
----
-toc: false
----
-
 # Best Practices in Python Workshop
 
 In this workshop, we will cover a few tools to improve Python code readability, maintainability, and reproducibility.
