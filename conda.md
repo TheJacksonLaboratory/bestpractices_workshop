@@ -125,8 +125,14 @@
     This will create a new environment named `bestpractices_final` with
     all the packages specified in the *environment.yml* file.
     Activating the new environment as before, using `conda activate bestpractices_final` (why is this the name?) and try running `python --version`. Try running `conda list` to see all the installed
-    packages. Everything listed at environment.yml should be there, along with all
-    dependencies. 
+    packages. Everything listed in the `environment.yml` should be there, along with all
+    dependencies.  
+    Note: The `pip` equivalent, *once you have an activated virtual environment with a Python interpreter*, is:
+    
+    ```bash
+    pip install -r requirements.txt
+    ```
+    This will install all packages listed in a `requirements.txt` file from PyPI.
 
 6. A final tip: append `--dry-run` to your `conda` commands to see what they will do without actually making any changes.
 
