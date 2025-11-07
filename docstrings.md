@@ -4,7 +4,7 @@
 
 1. In this section, we are going to be looking at _docstrings_. Docstrings are an easy way to write reference documentation that is easy to read for both humans and computers. It includes comprehensive information about what your code does and how it does it, and it can be easily reused as part of computer-generated documentation packages such as sphinx. For more details, see [Python Enhancement Proposal 257, PEP 257](https://peps.python.org/pep-0257/).
 
-2. For this guide, we will be following [`numpy`'s style guide](https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard) when it comes to docstrings. This guide has been adopted by a large portion of scientific Python packages, so if you decide to follow these guidelines you will quickly find that they will look like a lot of the the documentation on numpy, or pandas, or many other very popular packages. Also, many automated documentation generators work very well with this format.
+2. For this guide, we will be following [`numpy`'s style guide](https://numpydoc.readthedocs.io/en/stable/format.html#docstring-standard) when it comes to docstrings. This guide has been adopted by a large portion of scientific Python packages, so if you decide to follow these guidelines you will quickly find that they will look like a lot of the the documentation on numpy, or pandas, or many other very popular packages. Also, many automated documentation generators work very well with this format.
 
 3. Docstrings are strings that describe a module, function or class. They can be directly accessed in Python (`object.__doc__`). For consistency purposes, we will always surround them with a triple double quote (`"""`).
 
