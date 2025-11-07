@@ -63,7 +63,7 @@ def test_divide_arrays(a, b, expect):
     [
         ([1, 2], [1, 2, 3], ValueError),
         (1, "a", TypeError),
-    ]
+    ],
 )
 def test_add_arrays_errors(a, b, error):
     with pytest.raises(error):
@@ -75,7 +75,7 @@ def test_add_arrays_errors(a, b, error):
     [
         ([1, 2], [1, 2, 3], ValueError),
         (1, "a", TypeError),
-    ]
+    ],
 )
 def test_subtract_arrays_errors(a, b, error):
     with pytest.raises(error):
@@ -87,7 +87,7 @@ def test_subtract_arrays_errors(a, b, error):
     [
         ([1, 2], [1, 2, 3], ValueError),
         (1, "a", TypeError),
-    ]
+    ],
 )
 def test_multiply_arrays_errors(a, b, error):
     with pytest.raises(error):
@@ -100,7 +100,7 @@ def test_multiply_arrays_errors(a, b, error):
         ([1, 2], [1, 2, 3], ValueError),
         (1, "a", TypeError),
         ([1, 2, 3], [0, 2, 3], ZeroDivisionError),
-    ]
+    ],
 )
 def test_divide_arrays_errors(a, b, error):
     with pytest.raises(error):
