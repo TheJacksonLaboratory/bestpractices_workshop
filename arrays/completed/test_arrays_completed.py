@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "a, b, expect",
+    ("a", "b", "expect"),
     [
         ([1, 2, 3], [4, 5, 6], [5, 7, 9]),
         ([1, 2, 3], [-1, -2, -3], [0, 0, 0]),
@@ -17,7 +17,7 @@ def test_add_arrays(a, b, expect):
 
 
 @pytest.mark.parametrize(
-    "a, b, expect",
+    ("a", "b", "expect"),
     [
         ([1, 2, 3], [4, 5, 6], [-3, -3, -3]),
         ([1, 2, 3], [1, 2, 3], [0, 0, 0]),
@@ -31,7 +31,7 @@ def test_subtract_arrays(a, b, expect):
 
 
 @pytest.mark.parametrize(
-    "a, b, expect",
+    ("a", "b", "expect"),
     [
         ([1, 2, 3], [4, 5, 6], [4, 10, 18]),
         ([1, 2, 3], [0, 0, 0], [0, 0, 0]),
@@ -45,7 +45,7 @@ def test_multiply_arrays(a, b, expect):
 
 
 @pytest.mark.parametrize(
-    "a, b, expect",
+    ("a", "b", "expect"),
     [
         ([3, 2, 1], [4, 5, 4], [0.75, 0.4, 0.25]),
         ([0, 0, 0], [1, 2, 3], [0, 0, 0]),
