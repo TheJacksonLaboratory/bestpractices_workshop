@@ -414,7 +414,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-type-hints" class="level1">
 <h1>Python type hints</h1>
 <ol type="1">
-<li><p>In this section, we will look at <em>type hints</em>. Type hints are a way to annotate your Python code with information about the expected types of variables, function arguments, and return values. <em>Python is dynamically typed, so this is not required.</em> However, type hints help both humans and tools understand your code, catch bugs early, and improve code readability and maintainability. Type hints are part of the Python standard library since Python 3.5. For more details, see <a href="https://peps.python.org/pep-0484/">PEP484 which introduced type hints</a> and the <a href="https://docs.python.org/3/library/typing.html"><code>typing</code> module documentation</a>. Importantly, type hints <strong>do not change the runtime behavior of your code</strong>; they are simply annotations.</p></li>
+<li><p>In this section, we will look at <em>type hints</em>. Type hints are a way to annotate your Python code with information about the expected types of variables, function arguments, and return values.<br>
+<strong>Python is dynamically typed, so this is not required.</strong> However, type hints help both humans and tools understand your code, which can catch bugs early and improve code readability and maintainability.<br>
+Type hints are part of the Python standard library since Python 3.5. For more details, see <a href="https://peps.python.org/pep-0484/">PEP484 which introduced type hints</a> and the <a href="https://docs.python.org/3/library/typing.html"><code>typing</code> module documentation</a>. Importantly, type hints <strong>do not change the runtime behavior of your code</strong>; they are simply annotations.</p></li>
 <li><p>Why use type hints?</p>
 <ul>
 <li><strong>Clarity:</strong> Type hints make it clear what types your functions expect and return.</li>
@@ -427,26 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function annotation</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x: <span class="bu">int</span>, y: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Return the sum of two integers.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    x : int</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">        First integer to add.</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    y : int</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">        Second integer to add.</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    int</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">        The sum of `x` and `y`.</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; add(2, 3)</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">    5</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Examples of common types you may use in Python 3.9 and later:</p>
 <ul>
 <li><code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>: Basic types</li>
@@ -454,7 +437,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>These can be combined using bracket notation like: <code>list[int]</code>, <code>dict[str, float]</code>, etc.</p>
 <p>You can also import additional types from the <a href="https://docs.python.org/3/library/typing.html#"><code>typing</code> module</a> or other modules you use</p></li>
-<li><p>Type hints are not enforced at runtime, but you can use tools like <a href="https://mypy-lang.org/"><code>mypy</code></a> to check your code for type errors. To check your code, run: <code>mypy your_script.py</code> Mypy will report any type mismatches it finds, helping you catch bugs before they happen.</p></li>
+<li><p>Type hints are not enforced at runtime, but you can use tools like <a href="https://mypy-lang.org/"><code>mypy</code></a> to check your code for type errors. To check your typed code, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mypy</span> your_script.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>mypy</code> will report any type mismatches it finds, helping you catch bugs before they happen.</p></li>
 <li><p>If you want to learn more, check out:</p>
 <ul>
 <li><a href="https://docs.python.org/3/library/typing.html">Python typing documentation</a></li>
