@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -388,9 +423,9 @@ ul.task-list li input[type="checkbox"] {
 <li><p>To work with Python projects, it’s a good idea to use virtual environments. <strong>Virtual environments allow you to create isolated spaces for your Python projects, each with its own set of packages and dependencies.</strong> This way, you can avoid conflicts between different projects that may require different versions of the same package. This is particularly important in scientific computing, where you may have a long-running project that you need to keep working with, while also wanting to be able to start something new with its own dependencies.</p></li>
 <li><p>At the heart of a Python environment are:</p>
 <ul>
-<li>A Python interpreter: a specific version of Python that will be used to execute your code</li>
-<li>An environment management tool: a tool to create, manage, and switch between different environments</li>
-<li>A package management tool: a tool to install, update, and remove packages within an environment</li>
+<li><strong>A Python interpreter</strong>: a specific version of Python that will be used to execute your code</li>
+<li><strong>An environment management tool</strong>: a tool to create, manage, and switch between different environments</li>
+<li><strong>A package management tool</strong>: a tool to install, update, and remove packages within an environment</li>
 </ul></li>
 <li><p><a href="https://conda.org"><code>Conda</code></a> is a tool that combines all three of these functionalities. It allows you to create and manage virtual environments, manage different versions of Python, and install packages. Conda is particularly popular in the scientific Python community due to its ability to handle complex system-level dependencies, such as GPU support, and its support for packages outside of the Python ecosystem (such as R, C libraries, etc).</p></li>
 <li><p>There are other tools that can be used to manage virtual environments, such as <a href="https://docs.python.org/3/library/venv.html"><code>venv</code></a> (built into Python) and newer ones like <a href="https://docs.astral.sh/uv/"><code>uv</code></a> and <a href="https://pixi.sh/latest/"><code>pixi</code></a>. These use a <strong>project</strong> oriented approach, where the environment is tied to a specific project directory. Conda, on the other hand creates and manages environments centrally, independently of any specific directory. At the end of the day, it’s a matter of preference and use case, but the key take home message is to actually <strong>always use virtual environments for your projects!</strong></p></li>
@@ -398,9 +433,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="installing-conda-if-you-dont-have-it-already" class="level2">
 <h2 class="anchored" data-anchor-id="installing-conda-if-you-dont-have-it-already">Installing conda, <em>if you don’t have it already</em></h2>
 <ol type="1">
-<li><p>There are several distributions of <code>conda</code> and it can pull packages from many different sources called “channels”. In this workshop we will use the <a href="https://conda-forge.org">conda-forge</a> distribution called “miniforge” (or “miniforge3”). Go to the conda-forge downloads page: <a href="https://conda-forge.org/download/">https://conda-forge.org/download/</a>.<br>
-Download the installer for your operating system (Mac, Windows, Linux) and architecture (x86_64/amd64 or arm64/aarch64) and follow the installation instructions on that page. Note: When prompted whether to “automatically initialize conda”, I recommend saying “yes”. And on Windows, I recommend checking the options to “Create start menu shortcuts” and “Add Miniforge3 to my PATH environment variable”.</p></li>
-<li><p>Open a NEW terminal window. If you see <code>(base)</code> at the beginning of your prompt, you have installed it successfully. You can also run <code>conda --version</code> and see if you get a version output.</p></li>
+<li>There are several distributions of <code>conda</code> and it can pull packages from many different sources called “channels”. In this workshop we will use the <a href="https://conda-forge.org">conda-forge</a> distribution called “miniforge” (or “miniforge3”).
+<ul>
+<li>Go to the conda-forge downloads page: <a href="https://conda-forge.org/download/">https://conda-forge.org/download/</a>.<br>
+</li>
+<li>Download the installer for your operating system (Mac, Windows, Linux) and architecture (x86_64/amd64 or arm64/aarch64) and follow the installation instructions on that page.<br>
+</li>
+<li>Note: When prompted whether to “automatically initialize conda”, I recommend saying “yes”. And on Windows, I recommend checking the options to “Create start menu shortcuts” and “Add Miniforge3 to my PATH environment variable”.</li>
+</ul></li>
+<li>Open a NEW terminal window. If you see <code>(base)</code> at the beginning of your prompt, you have installed it successfully. You can also run <code>conda --version</code> and see if you get a version output.</li>
 </ol>
 </section>
 <section id="environments-how-do-they-work" class="level2">
@@ -408,11 +449,24 @@ Download the installer for your operating system (Mac, Windows, Linux) and archi
 <ol type="1">
 <li><p>The <code>(base)</code> at the beginning of the line indicates which conda environment is currently active: the <code>base</code> environment. Each environment will have its own version of Python, with its own packages. Conda takes care of all dependencies and so on.</p></li>
 <li><p><strong>VERY IMPORTANTLY, DO NOT INSTALL THINGS ON THE BASE ENVIRONMENT.</strong> It’s a sure way to make things more confusing for yourself. Anything you do should have its <em>own environment</em>. You should never be doing any work on your base environment: it’s the environment <code>conda</code> uses to run itself, so a conflict or problem there can break your entire <code>conda</code> installation.</p></li>
-<li><p>So first of all, let’s try to create a new, “clean” environment. Type <code>conda create -n bestpractices</code>. This will create a new environment named “bestpractices” (<code>-n</code> is shorthand for <code>--name</code>). Go ahead and do <code>conda activate bestpractices</code> - this should change the beginning of your prompt to <code>(bestpractices)</code>. We’re now inside this new environment. <em>Always remember to activate the environment you want to use or make changes to!</em></p></li>
+<li><p>So first of all, let’s try to create a new, “clean” environment. Type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will create a new environment named “bestpractices” (<code>-n</code> is shorthand for <code>--name</code>). Let’s activate it, so we can use it. Type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This should change the beginning of your prompt to <code>(bestpractices)</code>.<br>
+<strong>Always remember to activate the environment you want to use or make changes to!</strong></p></li>
 <li><p>Try running <code>python</code>. It probably didn’t work. Why?</p></li>
-<li><p>Let’s deactivate this empty environment and delete it. Do <code>conda     deactivate</code> and <code>conda remove -n bestpractices --all</code>. Try running <code>conda env list</code> and you will see you have no environments.</p></li>
-<li><p>Now let’s try to create an environment <em>with</em> Python. Go ahead and do <code>conda create -n bestpractices python=3.13</code> (or pick a version of your choice). Activate your new environment and try <code>python --version</code>. Also try <code>which python</code>. This should show you a path within the newly created environment, under your user, rather than in a system location like <code>/bin</code> or <code>/usr/bin</code>.</p></li>
-<li><p>Now try running <code>python</code> and then <code>import numpy as np</code>. This should fail, but why?</p></li>
+<li><p>Let’s deactivate this empty environment and delete it. To deactivate, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>And then, to delete the environment use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Try running <code>conda env list</code> and you will see you have no environments other than <code>base</code>.</p></li>
+<li><p>Now let’s try to create an environment <em>with</em> Python. Type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> bestpractices python=3.13</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(or pick a version of your choice). Activate your new environment as before and try:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can also try <code>which python</code>, depending on your platform. This should show you a path within the newly created environment, under your user, in a miniforge directory, rather than in a system location like <code>/bin</code> or <code>/usr/bin</code>.</p></li>
+<li><p>Now try running <code>python</code> to launch the interpreter and then <code>import numpy as np</code>. This should fail, but why?</p></li>
 </ol>
 </section>
 <section id="installing-packages-in-your-environment" class="level2">
@@ -427,14 +481,24 @@ Download the installer for your operating system (Mac, Windows, Linux) and archi
 </ul>
 <p>Generally, you can use either method, but <em>mixing</em> them can sometimes lead to conflicts. If you do use both, try to install what you need using <code>conda</code> first and then use <code>pip</code> for packages that are not available via <code>conda</code>.</p></li>
 <li><p>Try running step 7 from above again. It should work now.</p></li>
-<li><p>Now let’s deactivate and delete this environment again. Do <code>conda deactivate</code> and <code>conda remove -n bestpractices --all</code>.</p></li>
+<li><p>Now let’s deactivate and delete this environment, as before using <code>conda deactivate</code> and <code>conda env remove -n bestpractices</code>.</p></li>
 <li><p>This time, we will try to create an environment using the <em>environment.yml</em> in this repository. Navigate to where you cloned the workshop repository in your terminal and have a look at the contents of <em>environment.yml</em>.</p></li>
-<li><p>Now, try running <code>conda env create -f environment.yml</code>. Try activating the <code>bestpractices_final</code> (why is this the name?) environment and running <code>python --version</code>. Try running <code>conda list</code> to see all the installed packages. Everything listed at environment.yml should be there, along with all dependencies.</p></li>
+<li><p>Now, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will create a new environment named <code>bestpractices_final</code> with all the packages specified in the <em>environment.yml</em> file. Activating the new environment as before, using <code>conda activate bestpractices_final</code> (why is this the name?) and try running <code>python --version</code>. Try running <code>conda list</code> to see all the installed packages. Everything listed at environment.yml should be there, along with all dependencies.</p></li>
+<li><p>A final tip: append <code>--dry-run</code> to your <code>conda</code> commands to see what they will do without actually making any changes.</p></li>
 </ol>
 </section>
 <section id="some-advice-on-projects-and-dependencies" class="level2">
 <h2 class="anchored" data-anchor-id="some-advice-on-projects-and-dependencies">Some advice on projects and dependencies</h2>
-<p>Beyond using virtual environments, here are some best practices when it comes to managing dependencies for your projects: - Keep track of every package for every module you import from in your code! Maintain either an <code>environment.yml</code> (for <code>conda</code>) or a <code>requirements.txt</code> file (for <code>pip</code>) that lists all of the dependencies needed to run your code. - For <em>reproducibility</em>, it’s a good idea to specify (pin) the <em>specific versions</em> of your dependencies you are using in your environment files. - For <em>portability</em> and ability to incorporate your code into other projects, avoid pinning versions strictly: pin to the minimum version required for the functionality you need. - In addition to your environment file, for maximal reproducibility, consider generating <strong>a lock file</strong>, which specifies the <em>exact versions of all packages and their dependencies</em> in your environment. This can be done with <code>conda</code> using <a href="https://github.com/conda/conda-lock">conda-lock</a> or with <code>pip</code> using <a href="https://github.com/jazzband/pip-tools/">pip-tools</a>. (Additionally, both <code>uv</code> and <code>pixi</code> automatically generate lock files.) - If you will be sharing your code or expect others to run it, consider making a Python package. Check out the <a href="https://www.pyopensci.org/python-package-guide/index.html">pyOpenSci Python Package Guide</a> for more details on how to do that!</p>
+<p>Beyond using virtual environments, here are some best practices when it comes to managing dependencies for your projects:</p>
+<ul>
+<li>Keep track of every package for every module you import from in your code! Maintain either an <code>environment.yml</code> (for <code>conda</code>) or a <code>requirements.txt</code> file (for <code>pip</code>) that lists all of the dependencies needed to run your code.</li>
+<li>For <em>reproducibility</em>, it’s a good idea to specify (pin) the <em>specific versions</em> of your dependencies you are using in your environment files.</li>
+<li>For <em>portability</em> and ability to incorporate your code into other projects, avoid pinning versions strictly: pin to the minimum version required for the functionality you need.</li>
+<li>In addition to your environment file, for maximal reproducibility, consider generating <strong>a lock file</strong>, which specifies the <em>exact versions of all packages and their dependencies</em> in your environment. This can be done with <code>conda</code> using <a href="https://github.com/conda/conda-lock">conda-lock</a> or with <code>pip</code> using <a href="https://github.com/jazzband/pip-tools/">pip-tools</a>. (Additionally, both <code>uv</code> and <code>pixi</code> automatically generate lock files.)</li>
+<li>If you will be sharing your code or expect others to run it, consider making a Python package. Check out the <a href="https://www.pyopensci.org/python-package-guide/index.html">pyOpenSci Python Package Guide</a> for more details on how to do that!</li>
+</ul>
 
 
 </section>
