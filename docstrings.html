@@ -431,8 +431,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>If you would like to describe implementation details, this is a good place to put a <em>Notes</em> section. If what you’re doing includes equations, you can write them in LaTeX format. You can also add a <em>References</em> section if you would like to point at specific papers where the implementation came from, for example.</p></li>
 <li><p>It’s good practice to include an <em>Examples</em> section as well - this is just to show how your code would be used, not for testing! If your function has optional arguments or can be used in multiple ways, make sure to include multiple examples.</p></li>
 <li><p>Now, put all the information you got together and write docstrings for the functions we have in <code>arrays.py</code>! As an example, I am adding an example docstring for <code>add_arrays()</code> below:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">    This function adds together each element of the two passed lists.</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_arrays(x, y):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""This function adds together each element of the two passed lists.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
@@ -450,7 +450,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; add_arrays([1, 4, 5], [4, 3, 5])</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">    [5, 7, 10]</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note the underscores and line spacing in the sections; those are part of the <code>numpy</code> docstring style!</p></li>
 </ol>
 </section>
@@ -462,6 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 My go-to is <a href="https://docs.astral.sh/ruff/"><code>Ruff</code></a>, a fast Python linter (and formatter) that is a newer alternative to tools like <code>flake8</code> (and <code>black</code>). You should already have it installed on your conda environment.</p></li>
 <li><p>Go ahead and run <code>ruff check</code> in your repository directory and see if it returns anything. In general, the warnings raised by Ruff are pretty self-explanatory (“No newline at end of file”, “Blank line contains whitespace”), but if you have something flagged that you’re not sure about, you can see <a href="https://docs.astral.sh/ruff/rules/">the full list of rules</a>. If you click on the name of a rule, you will get a nice explanation.</p></li>
 <li><p>In general, it is a good idea to do a Ruff pass on your code before committing or merging it! Tip: you can also run <code>ruff check --fix</code> to automatically fix some of the issues it finds.</p></li>
+<li><p>You can specify extra rules using <code>--select</code>, for example <code>ruff check --select D</code> will only check for docstring related issues, while <code>I</code> will look at import sorting. You can also ignore specific rules using <code>--ignore</code>, for example <code>ruff check --ignore E501</code> will ignore line length issues.</p></li>
 <li><p>Finally, you can also use <code>ruff</code> as a formatting tool, similar to <code>black</code>. You can run <code>ruff format</code> on your repository directory to automatically reformat your code to follow PEP 8 guidelines. This is a great way to ensure that your code is consistently formatted and adheres to best practices. This can make it easier to avoid merge conflicts due to formatting/whitespace differences, however <strong>if you are working on a shared codebase, make sure to check the contribution guide before running any autoformatting tools.</strong></p></li>
 </ol>
 
