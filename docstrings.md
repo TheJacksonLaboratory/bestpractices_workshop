@@ -23,8 +23,8 @@
 10. Now, put all the information you got together and write docstrings for the functions we have in `arrays.py`! As an example, I am adding an example docstring for `add_arrays()` below:
 
     ```python
-        """
-        This function adds together each element of the two passed lists.
+    def add_arrays(x, y):
+        """This function adds together each element of the two passed lists.
 
         Parameters
         ----------
@@ -42,6 +42,7 @@
         --------
         >>> add_arrays([1, 4, 5], [4, 3, 5])
         [5, 7, 10]
+        
         """
     ```
     Note the underscores and line spacing in the sections; those are part of the `numpy` docstring style!
@@ -57,4 +58,6 @@ My go-to is [`Ruff`](https://docs.astral.sh/ruff/), a fast Python linter (and fo
 
 4. In general, it is a good idea to do a Ruff pass on your code before committing or merging it! Tip: you can also run `ruff check --fix` to automatically fix some of the issues it finds.
 
-5. Finally, you can also use `ruff` as a formatting tool, similar to `black`. You can run `ruff format` on your repository directory to automatically reformat your code to follow PEP 8 guidelines. This is a great way to ensure that your code is consistently formatted and adheres to best practices. This can make it easier to avoid merge conflicts due to formatting/whitespace differences, however **if you are working on a shared codebase, make sure to check the contribution guide before running any autoformatting tools.**
+5. You can specify extra rules using `--select`, for example `ruff check --select D` will only check for docstring related issues, while `I` will look at import sorting. You can also ignore specific rules using `--ignore`, for example `ruff check --ignore E501` will ignore line length issues.
+
+6. Finally, you can also use `ruff` as a formatting tool, similar to `black`. You can run `ruff format` on your repository directory to automatically reformat your code to follow PEP 8 guidelines. This is a great way to ensure that your code is consistently formatted and adheres to best practices. This can make it easier to avoid merge conflicts due to formatting/whitespace differences, however **if you are working on a shared codebase, make sure to check the contribution guide before running any autoformatting tools.**
