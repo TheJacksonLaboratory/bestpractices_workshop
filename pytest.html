@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-07">
+<meta name="dcterms.date" content="2025-11-10">
 
 <title>pytest – Best Practices in Python Workshop</title>
 <style>
@@ -405,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 7, 2025</p>
+      <p class="date">November 10, 2025</p>
     </div>
   </div>
   
@@ -441,7 +441,7 @@ It takes two arguments: a <em>tuple or string</em> with the <em>names</em> of th
 <li><p><strong>Exercise:</strong> Try using <code>@pytest.mark.parametrize()</code> for your test functions. What happens when you run <code>pytest</code> now? Write a test for <code>divide_arrays()</code> using this approach. Can you find the bugs in the <code>divide_arrays()</code> function with some clever testing?</p></li>
 <li><p>So far, we have assumed that everything passed to our array functions is correct; that is rarely an assumption you can make in real life. What happens if you run <code>add_arrays("this is a string", 1)</code>? What about <code>add_arrays([1, 2], [1, 2, 3])</code>?</p></li>
 <li><p>It’s time to add explicit exception handling to our functions. You will probably want to do <code>raise ValueError("array size mismatch")</code> for the case where arrays sizes are different, and <code>raise TypeError("arguments should be lists")</code> for when the arguments are not lists.</p></li>
-<li><p>Now, we can add new test functions named <code>test_add_arrays_error()</code> and so on, where we check if errors are being raised correctly. That is done by wrapping our function call with <code>with pytest.raises(ValueError)</code>, for example. What happens when you run <code>pytest</code> now? Add checks for both possible errors we came up with. What other cases can happen in e.g.&nbsp;<code>divide_arrays()</code>?</p></li>
+<li><p>Now, we can add new test functions named <code>test_add_arrays_error()</code> and so on, where we check if errors are being raised correctly. That is done by wrapping our function call with <code>with pytest.raises(ValueError)</code>, for example. What happens when you run <code>pytest</code> now? Add checks for both possible errors we came up with. Better yet, use the <a href="https://docs.pytest.org/en/stable/reference/reference.html#pytest-raises"><code>match</code> keyword argument</a> to check the string and ensure <em>the right</em> ValueError was raised! What other cases can happen in e.g.&nbsp;<code>divide_arrays()</code>?</p></li>
 <li><p>We have successfully found a way to separate the data to be tested from the code to be tested. <code>pytest</code> has an even better way to do that for more complex cases, for example, when you want multiple test functions using the same data. They are called <a href="https://docs.pytest.org/en/stable/explanation/fixtures.html#about-fixtures"><em>fixtures</em></a>.<br>
 A <em>fixture</em> is defined as a function that returns something we want to use repeatedly in our tests. <code>pytest</code> provides <a href="https://docs.pytest.org/en/stable/reference/fixtures.html">some fixtures out of the box</a>, like the very useful <code>tmp_path</code> fixture that gives you a unique temporary location.<br>
 But you can also create your own: fixtures can be used to set up test data, create mock objects, or perform any other setup tasks that are needed for your tests. To define a fixture, you use the decorator <code>@pytest.fixture</code> before a function. After defining a fixture, you can pass the name of the function as an argument in your test function, and that argument will assume the value that is returned by the fixture.</p></li>
