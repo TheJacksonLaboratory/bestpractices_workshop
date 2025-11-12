@@ -13,6 +13,8 @@
 
 ## Installing conda, *if you don't have it already*
 
+(Note: I encourage using `conda` version no older than 23.10.)
+
 1.  There are several distributions of `conda` and it can pull packages from many different sources
     called "channels". In this workshop we will use the [conda-forge](https://conda-forge.org) distribution called "miniforge" (or "miniforge3").  
     - Go to the conda-forge downloads page:
@@ -41,7 +43,7 @@
     Type:  
 
     ```bash
-    conda env create -n bestpractices
+    conda create -n bestpractices
     ``` 
 
     This will create a new environment named "bestpractices" (`-n` is shorthand for `--name`).
@@ -66,7 +68,7 @@
     And then, to delete the environment use:
     
     ```bash
-    conda env remove -n bestpractices
+    conda remove -n bestpractices --all
     ```
 
     Try running `conda env list` and you will see you have no environments other than `base`.
@@ -74,7 +76,7 @@
 6.  Now let's try to create an environment *with* Python. Type:
 
     ```bash
-    conda env create -n bestpractices python=3.13
+    conda create -n bestpractices python=3.13
     ```
     (or pick a version of your choice). Activate your new environment as before and try:
     
@@ -123,7 +125,7 @@
     conda env create -f environment.yml
     ```
     This will create a new environment named `bestpractices_final` with
-    all the packages specified in the *environment.yml* file.
+    all the packages specified in the *environment.yml* file (`-f` is shorthand for `--file`).
     Activating the new environment as before, using `conda activate bestpractices_final` (why is this the name?) and try running `python --version`. Try running `conda list` to see all the installed
     packages. Everything listed in the `environment.yml` should be there, along with all
     dependencies.  
@@ -134,7 +136,7 @@
     ```
     This will install all packages listed in a `requirements.txt` file from PyPI.
 
-6. A final tip: append `--dry-run` to your `conda` commands to see what they will do without actually making any changes.
+6. A final tip: append `--dry-run` to your `conda` commands to see what they will do without actually making any changes and refer to the [`conda` commands cheatsheet](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html#cheatsheet) if you're unsure about how to accomplish something.
 
 ## Some advice on projects and dependencies
 
