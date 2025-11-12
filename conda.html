@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-10">
+<meta name="dcterms.date" content="2025-11-12">
 
 <title>conda – Best Practices in Python Workshop</title>
 <style>
@@ -74,9 +74,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-000f0825b9c55ed21d14970d810c14a9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -293,8 +293,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Best Practices in Python Workshop</span>
     </a>
@@ -334,10 +332,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -405,7 +399,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 10, 2025</p>
+      <p class="date">November 12, 2025</p>
     </div>
   </div>
   
@@ -432,6 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <section id="installing-conda-if-you-dont-have-it-already" class="level2">
 <h2 class="anchored" data-anchor-id="installing-conda-if-you-dont-have-it-already">Installing conda, <em>if you don’t have it already</em></h2>
+<p>(Note: I encourage using <code>conda</code> version no older than 23.10.)</p>
 <ol type="1">
 <li>There are several distributions of <code>conda</code> and it can pull packages from many different sources called “channels”. In this workshop we will use the <a href="https://conda-forge.org">conda-forge</a> distribution called “miniforge” (or “miniforge3”).
 <ul>
@@ -450,7 +445,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The <code>(base)</code> at the beginning of the line indicates which conda environment is currently active: the <code>base</code> environment. Each environment will have its own version of Python, with its own packages. Conda takes care of all dependencies and so on.</p></li>
 <li><p><strong>VERY IMPORTANTLY, DO NOT INSTALL THINGS ON THE BASE ENVIRONMENT.</strong> It’s a sure way to make things more confusing for yourself. Anything you do should have its <em>own environment</em>. You should never be doing any work on your base environment: it’s the environment <code>conda</code> uses to run itself, so a conflict or problem there can break your entire <code>conda</code> installation.</p></li>
 <li><p>So first of all, let’s try to create a new, “clean” environment. Type:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This will create a new environment named “bestpractices” (<code>-n</code> is shorthand for <code>--name</code>). Let’s activate it, so we can use it. Type:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This should change the beginning of your prompt to <code>(bestpractices)</code>.<br>
@@ -459,10 +454,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Let’s deactivate this empty environment and delete it. To deactivate, type:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>And then, to delete the environment use:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">-n</span> bestpractices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">-n</span> bestpractices <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Try running <code>conda env list</code> and you will see you have no environments other than <code>base</code>.</p></li>
 <li><p>Now let’s try to create an environment <em>with</em> Python. Type:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-n</span> bestpractices python=3.13</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> bestpractices python=3.13</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>(or pick a version of your choice). Activate your new environment as before and try:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can also try <code>which python</code>, depending on your platform. This should show you a path within the newly created environment, under your user, in a miniforge directory, rather than in a system location like <code>/bin</code> or <code>/usr/bin</code>.</p></li>
@@ -485,11 +480,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>This time, we will try to create an environment using the <em>environment.yml</em> in this repository. Navigate to where you cloned the workshop repository in your terminal and have a look at the contents of <em>environment.yml</em>.</p></li>
 <li><p>Now, run:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This will create a new environment named <code>bestpractices_final</code> with all the packages specified in the <em>environment.yml</em> file. Activating the new environment as before, using <code>conda activate bestpractices_final</code> (why is this the name?) and try running <code>python --version</code>. Try running <code>conda list</code> to see all the installed packages. Everything listed in the <code>environment.yml</code> should be there, along with all dependencies.<br>
+<p>This will create a new environment named <code>bestpractices_final</code> with all the packages specified in the <em>environment.yml</em> file (<code>-f</code> is shorthand for <code>--file</code>). Activating the new environment as before, using <code>conda activate bestpractices_final</code> (why is this the name?) and try running <code>python --version</code>. Try running <code>conda list</code> to see all the installed packages. Everything listed in the <code>environment.yml</code> should be there, along with all dependencies.<br>
 Note: The <code>pip</code> equivalent, <em>once you have an activated virtual environment with a Python interpreter</em>, is:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This will install all packages listed in a <code>requirements.txt</code> file from PyPI.</p></li>
-<li><p>A final tip: append <code>--dry-run</code> to your <code>conda</code> commands to see what they will do without actually making any changes.</p></li>
+<li><p>A final tip: append <code>--dry-run</code> to your <code>conda</code> commands to see what they will do without actually making any changes and refer to the <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html#cheatsheet"><code>conda</code> commands cheatsheet</a> if you’re unsure about how to accomplish something.</p></li>
 </ol>
 </section>
 <section id="some-advice-on-projects-and-dependencies" class="level2">
